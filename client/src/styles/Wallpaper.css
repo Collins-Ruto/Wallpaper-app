@@ -176,6 +176,62 @@
   display: none;
 }
 
+      /*  Selected Image section */
+
+      .wal-img-sect {
+        position: fixed;
+        width: 100%;
+        background-color: rgba(15, 22, 15, 0.61);
+        z-index: 1;
+        padding:1rem 0 1rem 0;
+        height: 100%;
+        top: 0px;
+        color: white;
+        justify-content: space-around;
+      }
+      .x-toggle {
+        cursor: pointer;
+        background-color:rgb(129, 89, 89);
+        height: 2.5rem;
+        width: 2.5rem;
+        margin: .5rem 0 0 1rem;
+        border-radius:.5rem;
+        float: left;
+      }
+      .x-toggle:hover {
+        background-color: rgb(173, 58, 58);
+        transform: scale(.924);
+      }
+      .xmark {
+        width: 2rem;
+        height: .25rem;
+        margin-top: .5rem;
+        background-color: azure;
+        transform: rotate(45deg);
+        float: left;
+        margin:1.1rem 0 0 .25rem;
+      }
+      .xmark::before {
+        content: "";
+        display: block;
+        width: 2rem;
+        height: .25rem;
+        background-color: rgb(250, 255, 255);
+        transform: rotate(90deg);
+      }
+      .wall-header .fa-angle-left, .fa-angle-right{
+        font-size: 4rem;
+        top: 45%;
+        position: fixed;
+        cursor: pointer;
+      }
+      .wall-header .fa-angle-left{        
+        left: 1rem; 
+      }
+      .wall-header .fa-angle-right{
+        right: 1rem;
+      }
+
       /* Midway header changes */
 
 @media (max-width:775px) {
