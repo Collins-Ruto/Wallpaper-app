@@ -1,0 +1,321 @@
+.wallpaper {
+  height: 100%;
+  justify-content: center;
+  color: white;
+}
+.wall-header {
+  background-color: rgb(36, 36, 44);
+  background-image: url(../images/wall2.jpg);
+  background-position: center;
+}
+.wallpaper-home {
+  width: 100%;
+  margin-top: 0px;
+  border-bottom: 0.5rem solid rgb(98, 98, 99);
+  padding: 8rem 0 4rem 0;
+  margin: 0px;
+}
+.wallpaper-search {
+  text-align: center;
+  border: 1px solid;
+  max-width: 55rem;
+  margin: 0 auto;
+  padding: 3rem;
+  background-color: green;
+}
+.wallpaper-search h1 {
+  margin: 0 auto;
+  text-align: justify;
+  padding: 2rem;
+  font-size: 2.5rem;
+}
+.wallpaper-search input,
+.wall-nav-search input {
+  background: lightgray;
+  color: rgb(24, 17, 17);
+  height: 3rem;
+  min-width: 95%;
+  border-radius: 1rem;
+  border: 0px;
+  text-indent: 1rem;
+  font-size: 1.2rem;
+}
+.wallpaper-search i,
+.wall-nav-search i {
+  position: relative;
+  cursor: pointer;
+  color: rgb(128, 127, 127);
+  background: transparent;
+  font-size: 1.4rem;
+  padding: 1rem;
+  left: -3.5rem;
+  bottom: -0.25rem;
+  margin-right: -3.5rem;
+}
+.wallpaper-search button:hover {
+  cursor: pointer;
+  transform: scale(0.98);
+}
+.wallpaper-page {
+  column-gap: 0.3rem;
+  column-width: 16.6rem;
+  padding-top: 0.5rem;
+  background: gray;
+  padding-bottom: 1rem;
+}
+.image-card {
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 1rem;
+}
+.image-card img {
+  width: 96%;
+  min-width: 14rem;
+  object-fit: cover;
+  cursor: pointer;
+  border-radius: 0.3rem;
+  box-shadow: 4px 4px 10px black;
+}
+
+.image-act {
+  position: relative;
+  bottom: 1.5rem;
+  background: transparent;
+  margin: 0 auto;
+  margin-top: -1.9rem;
+  padding: 1.5rem 0 0.25rem 0;
+  width: 96%;
+  border-radius: 0.4rem;
+  opacity: 0;
+}
+.image-act:hover {
+  opacity: 1;
+  background: rgb(2, 0, 36);
+  background: linear-gradient(
+    0deg,
+    rgba(22, 22, 22, 0.781) 0%,
+    rgba(78, 78, 78, 0) 100%
+  );
+}
+
+.image-act i {
+  font-size: 1.4rem;
+  margin: 0 1rem;
+  background: transparent;
+  color: rgb(219, 219, 215);
+}
+.image-act i:hover {
+  color: rgb(216, 102, 57);
+  cursor: pointer;
+}
+
+/* 
+        Navigation stylings starts here
+    ======================================
+    ======================================
+ */
+
+.wall-nav {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  z-index: 1;
+  background: transparent;
+}
+.trans {
+  background-color: transparent;
+}
+.wall-nav-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.3rem;
+  background-color: rgba(7, 7, 10, 0.637);
+  padding-bottom: 5px;
+  height: 4rem;
+}
+.wall-nav-logo {
+  margin-left: .3rem;
+  width: 15%;
+  min-width: 13rem;
+}
+.wall-nav-logo img {
+    width: 100%;
+    cursor:pointer;
+  }
+.wall-nav-search {
+  width: 40%;
+  padding: 0px;
+  align-items: center;
+  min-width: 15.2rem;
+}
+.wall-nav-search input {
+  height:2.8rem;
+}
+.wall-nav-links {
+  display: flex;
+  margin-left: 2px;
+  width: 42%;
+  justify-content: space-evenly;
+  padding: 0px;
+}
+.wall-nav-link {
+  list-style: none;
+  text-decoration: none;
+  color: antiquewhite;
+  padding: 0.5rem 0.5rem;
+}
+.wall-nav-link:hover {
+  color: rgb(157, 204, 207);
+}
+.wall-nav-links .wall-nav-icon {
+  display:none;
+}
+.wall-bar {
+  display: none;
+}
+
+      /* Midway header changes */
+
+@media (max-width:775px) {
+  .wall-nav-logo {
+  margin-left: .3rem;
+  width: 14%;
+  min-width: 11rem;
+}
+.wall-nav-search i {
+  padding: .5rem;
+  left:-2.5rem;
+}
+
+  .wall-nav-link {
+    padding:0.3rem;
+    width: 38%;
+  }
+  .wall-nav-links .wall-nav-txt {
+  display:none;
+}
+.wall-nav-links .wall-nav-icon {
+  display:block;
+  padding: 0px;
+  width:2rem;
+}
+}
+
+
+/* 
+                    Mobile CSS first designs
+================================================================
+================================================================
+*/
+
+@media (max-width: 600px) {
+  .wallpaper-search {
+    padding: 4rem 0 0 0;
+    border: none;
+  }
+  .wallpaper-search h1 {
+    font-size: 1.8rem;
+  }
+  .wallpaper-search input,
+  .wallpaper-search i {
+    display: none;
+  }
+
+  /*  Header mods for Mobile*/
+
+  .wall-nav-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.3rem;
+    background-color: rgba(7, 7, 10, 0.637);
+  }
+  .wall-nav-logo {
+    margin-left: 0.1rem;
+    width: 35%;
+    margin: 0px;
+    min-width:8rem;
+  }
+  .wall-nav-search {
+    width: 60%;
+    padding: 0px;
+    min-width: 11rem;
+  }
+  .wall-nav-search input {
+    width: 95%;
+    height: 1.8rem;
+    border-radius: 0.2rem;
+    font-size: 1rem;
+    text-indent: .3rem;
+  }
+  .wall-nav-search i {
+    top: 0.1rem;
+    left: -2.5rem;
+    height: 2.5rem;
+    padding: 0.5rem 1.1rem;
+  }
+  .wall-nav-links {
+    display: none;
+    margin: 0;
+  }
+  .wall-bar {
+    display: block;
+    padding: 0.6rem;
+  }
+  .wall-bar i {
+    font-size: 2rem;
+  }
+
+  /*  Mobile Wallpaper gallery  */
+
+  .wallpaper-page {
+    column-gap: 0.5rem;
+    column-width: 10rem;
+    padding-top: 0.5rem;
+    background: gray;
+    column-fill: balance;
+  }
+
+  .image-card {
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding-bottom: 1rem;
+  }
+
+  .image-card img {
+    width: 96%;
+    min-width: 10rem;
+    cursor: pointer;
+    border-radius: 0.3rem;
+    box-shadow: 3px 3px 8px black;
+  }
+
+  .image-item {
+    padding: 0.2rem;
+  }
+
+  .image-act {
+    position: relative;
+    bottom: 0.4rem;
+    background: transparent;
+    margin-top: -1.5rem;
+    padding: 0.25rem 0;
+    width: 96%;
+    border-radius: 0.4rem;
+    opacity: 1;
+    background: rgb(2, 0, 36);
+    background: linear-gradient(
+      0deg,
+      rgba(22, 22, 22, 0.781) 0%,
+      rgba(78, 78, 78, 0) 100%
+    );
+  }
+
+  .image-act i {
+    font-size: 1.2rem;
+  }
+}
