@@ -24,7 +24,7 @@ export default function Wallpaper() {
     })
       .then((res) => res.json())
       .then((data) => setData((prev) => prev.concat(data.photos)));
-    return () => {};
+    return () => {}
   }, [count])
   //https://api.imgflip.com/get_memes)
 
