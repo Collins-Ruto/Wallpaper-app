@@ -58,8 +58,8 @@
 }
 .wallpaper-page {
   column-gap: 0.3rem;
-  column-width: 16.6rem;
-  padding-top: 0.5rem;
+  column-width: 16.3rem;
+  padding:1rem 0.5rem;
   background: gray;
   padding-bottom: 1rem;
 }
@@ -67,7 +67,6 @@
   position: relative;
   align-items: center;
   justify-content: center;
-  padding-bottom: 1rem;
 }
 .image-card img {
   width: 96%;
@@ -87,7 +86,9 @@
   padding: 1.5rem 0 0.25rem 0;
   width: 96%;
   border-radius: 0.4rem;
-  opacity: 0;
+  opacity: 1;
+  text-align: center;
+
 }
 .image-act:hover {
   opacity: 1;
@@ -108,6 +109,25 @@
 .image-act i:hover {
   color: rgb(216, 102, 57);
   cursor: pointer;
+}
+.footer {
+  padding: 1rem;
+  justify-content: center;
+  text-align: center;
+  background: gray;
+}
+.footer button {
+  margin: 0 auto;
+  padding: 0.5rem 1rem;
+  font-size: 1.3rem;
+  background: rgb(54, 128, 54);
+  color: white;
+  border: 0px;
+  border-radius: 0.2rem;
+  cursor: pointer;
+}
+.footer button:hover {
+  transform: scale(0.97); 
 }
 
 /* 

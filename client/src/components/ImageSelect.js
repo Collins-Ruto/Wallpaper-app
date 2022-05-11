@@ -2,14 +2,15 @@ import React from 'react'
 import '../styles/ImageSelect.css'
 import imag from '../images/26.jpg'
 
+
 export default function ImageSelect(props) {
-    console.log(props.image.url)
+    console.log(props.image.src.original)
   return (
     <div className="img-select-cont">
         <div className="img-sect-head">
             <div className="img-owner">
                 <img src={imag} alt=""></img>
-                <h3>{props.image.name}</h3>
+                <h3>{props.image.photographer}</h3>
             </div>
             <div className="img-head-rgt">
                 <div className="img-likes">
@@ -26,8 +27,9 @@ export default function ImageSelect(props) {
             </div>
         </div>
         <div className="img-content">
-             <img src={props.image.url} alt=""></img>
+             <img src={props.image.src.original} alt=""></img>
         </div>
+        <div className="img-alt">{props.image.alt}</div>
     </div>
   )
 }

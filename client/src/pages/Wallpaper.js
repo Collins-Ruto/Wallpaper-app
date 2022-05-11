@@ -2,28 +2,36 @@ import React from "react";
 import ImageSelect from "../components/ImageSelect";
 import Navigation from "../components/Navigation";
 import "../styles/Wallpaper.css";
-// import FontAwesomeIcon from "fort-awesome";
 
 export default function Wallpaper() {
-  const [datab, setData] = React.useState([]);
-  const [count, setcount] = React.useState(0);
+  // const [datas, setDatas] = React.useState([]);
+  const [datab, setData] = React.useState(
+    []
+  );
+  const [count, setcount] = React.useState(1);
   const [image, setImage] = React.useState();
-  const [index, setIndex] = React.useState(datab.indexOf(image));
-  function switchBar() {
+  const [index, setIndex] = React.useState(1)
+  function nextPage() {
     setcount((count) => count + 1);
   }
-  console.log(switchBar)
   React.useEffect(() => {
-    fetch("https://api.imgflip.com/get_memes")
+    fetch(`https://api.pexels.com/v1/curated?page=${count}`, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        Authorization: 'YOUR_API_KEY_HERE',
+      }
+    })
       .then((res) => res.json())
-      .then((data) => setData(data.data.memes));
+      .then((data) => setData((prev) => prev.concat(data.photos)));
     return () => {};
-  }, [count]);
+  }, [count])
+  //https://api.imgflip.com/get_memes)
 
   function clickHandler(img, index) {
     setImage(img)
     setIndex(index)
-    // console.log("click", index, datab[index].url)
+    console.log("click", index, datab[index].url)
   }
   function nextImg(){
     let newIdx = index + 1
@@ -35,11 +43,11 @@ export default function Wallpaper() {
     setImage(datab[newIdx].url)
     setIndex(newIdx)
   }
-  // console.log(datab)
+   console.log("dtays",datab[3])
   const imageCard = datab.map((image) => {
     return (
-      <div className="image-card trans" key={image.id} onClick={() => clickHandler(image.url, datab.indexOf(image))}>
-        <img id={image.id} src={image.url} alt=""></img>
+      <div className="image-card trans" key={image.id} onClick={() => clickHandler(image, datab.indexOf(image))}>
+        <img src={image.src.large} alt=""></img>
         <div className="image-act">
           <i className="fa-regular fa-heart" aria-hidden="true"></i>
           <i className="fa-regular fa-circle-down"></i>
@@ -77,6 +85,9 @@ export default function Wallpaper() {
         </section>
       </div>
       <div className="wallpaper-page">{imageCard}</div>
+      <div className="footer" onClick={nextPage}>
+        <button>Load More ...</button>
+      </div>
     </div>
   );
 }
