@@ -4,29 +4,46 @@ import Navigation from "../components/Navigation";
 import "../styles/Wallpaper.css";
 
 export default function Wallpaper() {
-  // const [datas, setDatas] = React.useState([]);
-  const [datab, setData] = React.useState(
-    []
-  );
-  const [count, setcount] = React.useState(1);
+  
+  const [datab, setData] = React.useState([]);
+  const [count, setcount] = React.useState(2);
   const [image, setImage] = React.useState();
   const [index, setIndex] = React.useState(1)
-  function nextPage() {
-    setcount((count) => count + 1);
-  }
+  const [searchIn, setSearchIn] = React.useState("");
+  const [querys, setQuerys] = React.useState(`curated?page=${count}`)
+  // const [isSearch, setIsSearch] = React.useState(false)
+
+  
   React.useEffect(() => {
-    fetch(`https://api.pexels.com/v1/curated?page=${count}`, {
+    fetch(`https://api.pexels.com/v1/${querys}`, {
       method: "GET",
       headers: {
         Accept: "application/json",
-        Authorization: 'YOUR_API_KEY_HERE',
+        Authorization: 'YOUR_API_KEY',
       }
     })
       .then((res) => res.json())
       .then((data) => setData((prev) => prev.concat(data.photos)));
-    return () => {}
-  }, [count])
+    return () => {};
+  }, [count, querys])
+  
+  function nextPage() {
+    setcount((count) => count + 1);
+    setQuerys(`curated?page=${count + 1}`)
+  }
+  console.log(count, querys)
+  
   //https://api.imgflip.com/get_memes)
+  function imgSearch(e) {
+    const search = e.target.value
+    if (search === "") {
+      setSearchIn("")
+      return
+    }
+    setSearchIn(search)
+    setData([])
+    setQuerys(`search?query=${search}&page=${count}`)
+  }
 
   function clickHandler(img, index) {
     setImage(img)
@@ -34,22 +51,38 @@ export default function Wallpaper() {
     console.log("click", index, datab[index].url)
   }
   function nextImg(){
+    if (index === datab.length - 2) {
+      nextPage()
+    }
     let newIdx = index + 1
     setImage(datab[newIdx].url)
     setIndex(newIdx)
   }
   function prevImg(){
-    let newIdx = index - 1
+    if (index === 0) {
+      var newIdx = datab.length - 1
+    } else {
+         newIdx = index - 1
+    }
     setImage(datab[newIdx].url)
     setIndex(newIdx)
   }
+  function favImage(img){
+    let tempDt = [...datab]
+    tempDt[img] = datab[img].liked ? 
+    {...tempDt[img], liked: false}: {...tempDt[img], liked: true}
+    setData(tempDt)
+    console.log("chekin")
+  }
+  console.log(datab)
    console.log("dtays",datab[3])
   const imageCard = datab.map((image) => {
     return (
-      <div className="image-card trans" key={image.id} onClick={() => clickHandler(image, datab.indexOf(image))}>
-        <img src={image.src.large} alt=""></img>
+      <div className="image-card trans" key={image.id} >
+        <img onClick={() => clickHandler(image, datab.indexOf(image))} src={image.src.large} alt=""></img>
         <div className="image-act">
-          <i className="fa-regular fa-heart" aria-hidden="true"></i>
+          {!image.liked ? <i onClick={() => favImage(datab.indexOf(image))} className="fa-regular fa-heart" aria-hidden="true"></i>
+          : <i onClick={() => favImage(datab.indexOf(image))} className="fa-solid fa-heart image-favs" aria-hidden="true"></i>}
           <i className="fa-regular fa-circle-down"></i>
           <i className="fa fa-share" aria-hidden="true"></i>
         </div>
@@ -79,7 +112,7 @@ export default function Wallpaper() {
               The image library is available for you. check out our collection
               of high quality wallpapers for your phone, tablet or computer.
             </h1>
-            <input placeholder="search for images"></input>
+            <input value={searchIn} onChange={imgSearch} placeholder="search for images"></input>
             <i className="fa fa-search" aria-hidden="true"></i>
           </div>
         </section>

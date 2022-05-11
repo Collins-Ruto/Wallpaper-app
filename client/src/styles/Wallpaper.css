@@ -73,22 +73,21 @@
   min-width: 14rem;
   object-fit: cover;
   cursor: pointer;
-  border-radius: 0.3rem;
-  box-shadow: 4px 4px 10px black;
+  border-radius: 0rem;
+  box-shadow: 4px 4px 4px black;
 }
 
 .image-act {
   position: relative;
-  bottom: 1.5rem;
+  bottom: 1rem;
   background: transparent;
   margin: 0 auto;
-  margin-top: -1.9rem;
-  padding: 1.5rem 0 0.25rem 0;
+  margin-top: -2.4rem;
+  padding: 1.5rem 0 0.2rem 0;
   width: 96%;
-  border-radius: 0.4rem;
-  opacity: 1;
+  border-radius: 0rem;
+  opacity: 0;
   text-align: center;
-
 }
 .image-act:hover {
   opacity: 1;
@@ -109,6 +108,9 @@
 .image-act i:hover {
   color: rgb(216, 102, 57);
   cursor: pointer;
+}
+.imgage-favs {
+  color: rgb(224, 61, 32);
 }
 .footer {
   padding: 1rem;
