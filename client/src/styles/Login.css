@@ -1,0 +1,72 @@
+.login-page {
+    background: #001e3c;
+    justify-content: center;
+    color: white;
+    text-align: center;
+    padding: 2rem 1rem;
+    align-content: center;
+    height: 40rem;
+    font-family:Arial, Helvetica, sans-serif;
+}
+.login-cont {
+    max-width: 22rem;
+    margin: 1rem auto;
+    border:1px solid rgb(82, 62, 62);
+    padding: 1rem;
+    background:rgba(0, 0, 0, 0.13);
+    border-radius: .5rem;
+}
+.login-cont .fa-user {
+    background: blue;
+    padding: .7rem .8rem;
+    font-size: 2rem;
+    border-radius: 70%;
+    margin-top: .5rem;
+}
+.login-page form {
+    display: flex;
+    flex-direction: column;
+    text-align:justify;
+}
+.login-page input{
+    width: 97%;
+    height:2rem;
+    margin: .4rem auto .8rem auto;
+}
+.login-page input:focus {
+    border: 1px solid blue;
+}
+.login-cont small {
+    color:rgb(248, 109, 109);
+}
+.login-cont span {
+    color:rgb(89, 89, 255);
+    text-decoration: underline;
+    cursor: pointer;
+}
+.login-page button {
+    min-width: 100%;
+    margin: 1rem auto .5rem auto;
+    font-size: 1.1rem;
+    background: blue;
+    color: #fff;
+    padding: .5rem;
+    border: 0px;
+    border-radius: .2rem;
+}
+.login-page .google-sign {
+    background: blue;
+    padding: .35rem;
+    font-size: 1.1rem;
+    border-radius: .2rem;
+}
+.login-page .google-sign:hover, button:hover {
+    cursor: pointer;
+    background-color:blue;
+}
+.login-cont .fa-google {
+    margin-right:1rem;
+    font-size: 1.5rem;
+}
+
+

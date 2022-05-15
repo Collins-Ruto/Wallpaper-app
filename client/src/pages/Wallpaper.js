@@ -3,7 +3,7 @@ import ImageSelect from "../components/ImageSelect";
 import Navigation from "../components/Navigation";
 import "../styles/Wallpaper.css";
 
-export default function Wallpaper() {
+export default function Wallpaper({user, setUser}) {
   
   const [datab, setData] = React.useState([]);
   const [count, setcount] = React.useState(2);
@@ -93,7 +93,7 @@ export default function Wallpaper() {
   return (
     <div className="wallpaper">
       <div>
-        <Navigation />
+        <Navigation user={user} setUser={setUser} />
       </div>
       <div className="wall-header">
         <section className="wallpaper-home trans">
