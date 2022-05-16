@@ -158,13 +158,25 @@
   height: 4rem;
 }
 .wall-nav-logo {
-  margin-left: .3rem;
-  width: 15%;
-  min-width: 13rem;
+  margin-left: .1rem;
+  width: 13%;
+  min-width: 10.7rem;
+}
+.wall-nav-logo .brand-name {
+  display: flex;
+  align-items: center;
 }
 .wall-nav-logo img {
-    width: 100%;
+    max-width: 4.2rem;
+    max-height: 4.2rem;
     cursor:pointer;
+  }
+  .brand-name {text-decoration: none;}
+  .brand-name h3 {
+    text-decoration: none;
+    color: yellow;
+    font-size:2rem;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif ;
   }
 .wall-nav-search {
   width: 40%;
@@ -181,6 +193,7 @@
   width: 42%;
   justify-content: space-evenly;
   padding: 0px;
+  align-items: center;
 }
 .wall-nav-link {
   list-style: none;
@@ -259,8 +272,11 @@
 @media (max-width:775px) {
   .wall-nav-logo {
   margin-left: .3rem;
-  width: 14%;
-  min-width: 11rem;
+  width: 10%;
+  min-width: 9.5rem;
+}
+.brand-name h3 {
+  font-size:1.6rem;
 }
 .wall-nav-search i {
   padding: .5rem;
@@ -278,6 +294,16 @@
   display:block;
   padding: 0px;
   width:2rem;
+}
+.wall-icon-letter {
+  background:blue;
+  padding:.1rem .6rem;
+  width:1.2rem;
+  font-size: 2rem;
+  margin:0px;
+  border-radius:50%;
+  border:1px solid;
+  font-family:monospace;
 }
 }
 
@@ -312,10 +338,11 @@
   }
   .wall-nav-logo {
     margin-left: 0.1rem;
-    width: 35%;
+    width: 9%;
     margin: 0px;
-    min-width:8rem;
+    min-width:4rem;
   }
+  .brand-name h3{display: none}
   .wall-nav-search {
     width: 60%;
     padding: 0px;

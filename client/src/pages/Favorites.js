@@ -1,14 +1,12 @@
 import React from 'react'
-import Navigation from '../components/Navigation'
+import Wallpaper from './Wallpaper'
 
-export default function Favorites() {
+export default function Favorites({user}) {
+  const favs = user.favorites
   return (
     <div>
-        <div className="">
-            <Navigation />
-        </div>
         <div className="favorite">
-            Favorites
+            <Wallpaper user={user} favs={favs}/>
         </div>
     </div>
   )

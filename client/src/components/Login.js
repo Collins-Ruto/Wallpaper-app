@@ -1,8 +1,8 @@
 import React, {useState} from 'react'
 import { Link } from 'react-router-dom'
 import '../styles/Login.css'
-
-const initialState = {name:"", email:"", password:"", confPass:""}
+import Navigation from './Navigation'
+const initialState = {name:"", email:"", password:"", confPass:"", favorites:[]}
 
 function Login({user, setUser}) {
   const [formData, setFormData] = useState(initialState)
@@ -15,15 +15,20 @@ function Login({user, setUser}) {
     console.log(e.target.name)
     e.target.name === "confPass" && confirm(e.target.value)
     }
-  
+  const submit =(e)=>{
+    e.preventDefault()
+    setUser(formData)
+  }
   const confirm =(conf) =>{
     formData.password === conf && setEqPass(true)
     formData.password !== conf && setEqPass(false)
   }
-  console.log(formData)
+  console.log("data ",formData)
+  console.log("user ",user)
   //value={formData.name}value={formData.email}
   return (
     <div className="login-page">
+      <Navigation user={user} setUser={setUser}/>
         {user ? 
         <div>
             <h1>You are logged in, wanna go back to images</h1>
@@ -34,14 +39,15 @@ function Login({user, setUser}) {
             <h3>Sign up</h3>
             <div>
               {isSigned ? <div>
-                <form>
+                <form onSubmit={(e)=>submit(e)}>
                   <label htmlFor="email">Your Email</label>
                 <input type="email" name="email" id="email" onChange={()=>{}} value={formData.email} required/>
                 <label htmlFor="password">Password</label>
                 <input type="password" name="password" id="password" onChange={()=>{}} value={formData.password} required/>
+                <button>Sign In</button>
                 </form>
               </div> :
-            <form onChange={(e)=>userHandler(e)}>
+            <form onChange={(e)=>userHandler(e)} onSubmit={(e)=>submit(e)}>
                 <label htmlFor="name">Your Name</label>
                 <input type="text" name="name"  id="name" onChange={()=>{}} required/>
                 <label htmlFor="email">Your Email</label>
@@ -51,7 +57,7 @@ function Login({user, setUser}) {
                 <label htmlFor="conf-pass">Confirm Password</label>
                 <input type="password" name="confPass" id="conf-pass" onChange={()=>{}} value={formData.confPass} required/>
                 <small>{!eqPass? "Passwords do not match!": ""}</small>
-                <button>Sign Up</button>
+                <button onClick={(e)=>submit(e)}>Sign Up</button>
             </form> }
             <div className="google-sign"><i className="fa-brands fa-google"></i>  Sign in with Google</div>
             <h4>{isSigned? "Don't": "Already"} have an account? <span onClick={()=>setIsSigned((prev)=>!prev)}>{isSigned? "Sign up": "Sign In"}</span></h4>

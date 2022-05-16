@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ImageSelect from "../components/ImageSelect";
 import Navigation from "../components/Navigation";
 import "../styles/Wallpaper.css";
 
-export default function Wallpaper({user, setUser}) {
+export default function Wallpaper({user, setUser, favs, usr}) {
   
   const [datab, setData] = React.useState([]);
   const [count, setcount] = React.useState(2);
@@ -11,21 +11,21 @@ export default function Wallpaper({user, setUser}) {
   const [index, setIndex] = React.useState(1)
   const [searchIn, setSearchIn] = React.useState("");
   const [querys, setQuerys] = React.useState(`curated?page=${count}`)
+  const [fav, setFav] = React.useState(false)
   // const [isSearch, setIsSearch] = React.useState(false)
-
   
   React.useEffect(() => {
     fetch(`https://api.pexels.com/v1/${querys}`, {
       method: "GET",
       headers: {
         Accept: "application/json",
-        Authorization: 'YOUR_API_KEY',
+        Authorization: '563492ad6f9170000100000181ae42c6ac634e868db6b9ef46ecfae6',
       }
     })
       .then((res) => res.json())
-      .then((data) => setData((prev) => prev.concat(data.photos)));
+      .then((data) =>!favs && setData((prev) => prev.concat(data.photos)));
     return () => {};
-  }, [count, querys])
+  }, [count, favs, querys])
   
   function nextPage() {
     setcount((count) => count + 1);
@@ -73,7 +73,23 @@ export default function Wallpaper({user, setUser}) {
     {...tempDt[img], liked: false}: {...tempDt[img], liked: true}
     setData(tempDt)
     console.log("chekin")
+
+    if (!user){return}
+    const faImg = datab[img]
+    !user.favorites && setUser({...user, favorites: []})
+    let tempUsr = user
+    console.log("faImg", faImg)
+    tempUsr.favorites = [...tempUsr.favorites, faImg]
+    setUser(tempUsr)
+    console.log("homes ", user)
   }
+  useEffect(() => {
+    favs && setData(favs)
+    return
+  }, [favs])
+  
+  
+  favs && console.log("favs open",favs)
   console.log(datab)
    console.log("dtays",datab[3])
   const imageCard = datab.map((image) => {
@@ -93,10 +109,10 @@ export default function Wallpaper({user, setUser}) {
   return (
     <div className="wallpaper">
       <div>
-        <Navigation user={user} setUser={setUser} />
+        <Navigation user={user} setUser={setUser} fav={fav} setFav={setFav}/>
       </div>
       <div className="wall-header">
-        <section className="wallpaper-home trans">
+        {!usr? <section className="wallpaper-home trans" >
         {image? 
         <div className="wal-img-sect">
         <div onClick={() => clickHandler()} className="x-toggle">
@@ -115,7 +131,7 @@ export default function Wallpaper({user, setUser}) {
             <input value={searchIn} onChange={imgSearch} placeholder="search for images"></input>
             <i className="fa fa-search" aria-hidden="true"></i>
           </div>
-        </section>
+        </section>: ""}
       </div>
       <div className="wallpaper-page">{imageCard}</div>
       <div className="footer" onClick={nextPage}>

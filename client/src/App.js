@@ -8,7 +8,8 @@ import Login from "./components/Login";
 
 function App() {
   const [user, setUser] = useState(null)
-
+  console.log("app user ", user)
+  
   return (
     <div className="App">
       <div>
@@ -16,7 +17,7 @@ function App() {
           <Route exact path="/" element={<Wallpaper user={user} setUser={setUser}/>}></Route>
           <Route path="/user" element={<User user={user} setUser={setUser} />}/>
           <Route path="/login" element={<Login user={user} setUser={setUser} />}/>
-          <Route path="/favorites" element={<Favorites />}></Route>
+          <Route path="/favorites" element={<Favorites user={user}/>}></Route>
           <Route path="/upload" element={<Upload/>}></Route>
         </Routes>
       </div>
