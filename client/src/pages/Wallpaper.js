@@ -19,7 +19,7 @@ export default function Wallpaper({user, setUser, favs, usr}) {
       method: "GET",
       headers: {
         Accept: "application/json",
-        Authorization: '563492ad6f9170000100000181ae42c6ac634e868db6b9ef46ecfae6',
+        Authorization: 'YOUR_API_KEY',
       }
     })
       .then((res) => res.json())
@@ -88,7 +88,6 @@ export default function Wallpaper({user, setUser, favs, usr}) {
     return
   }, [favs])
   
-  
   favs && console.log("favs open",favs)
   console.log(datab)
    console.log("dtays",datab[3])
@@ -109,7 +108,7 @@ export default function Wallpaper({user, setUser, favs, usr}) {
   return (
     <div className="wallpaper">
       <div>
-        <Navigation user={user} setUser={setUser} fav={fav} setFav={setFav}/>
+        <Navigation user={user} fav={fav} setFav={setFav}/>
       </div>
       <div className="wall-header">
         {!usr? <section className="wallpaper-home trans" >
@@ -134,9 +133,9 @@ export default function Wallpaper({user, setUser, favs, usr}) {
         </section>: ""}
       </div>
       <div className="wallpaper-page">{imageCard}</div>
-      <div className="footer" onClick={nextPage}>
+      {favs? "": <div className="footer" onClick={nextPage}>
         <button>Load More ...</button>
-      </div>
+      </div>}
     </div>
   );
 }

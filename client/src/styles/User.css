@@ -1,0 +1,24 @@
+.user-page {
+    text-align: center;
+    padding-top:7rem;
+    padding-bottom: 1rem;
+}
+
+.user-pro img{
+    width: 10rem;
+}
+.user-page h1 {
+    font-size:2.5rem;
+    font-family: 'Courier New', Courier, monospace;
+}
+.user-page h3 {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+.user-page button {
+    padding: 0.5rem 2rem;
+    font-size:1.3rem;
+}
+.user-page h2 {
+    text-align:justify;
+    margin-left: 10%;
+}

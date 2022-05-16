@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import devsq1 from "../images/ripplelg.svg";
 import '../styles/Wallpaper.css'
 
-export default function Navigation({user, setUser,fav, setFav}) {
+export default function Navigation({user, fav, setFav}) {
     var bar = false;
     function switchBar() {
         bar = !bar

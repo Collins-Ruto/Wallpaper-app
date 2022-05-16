@@ -1,10 +1,13 @@
 import React, {useState} from 'react'
 import { Link } from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
+
 import '../styles/Login.css'
 import Navigation from './Navigation'
 const initialState = {name:"", email:"", password:"", confPass:"", favorites:[]}
 
 function Login({user, setUser}) {
+  const history = useNavigate()
   const [formData, setFormData] = useState(initialState)
   const [eqPass, setEqPass] = useState(true)
   const [isSigned, setIsSigned] = useState(false)
@@ -18,6 +21,7 @@ function Login({user, setUser}) {
   const submit =(e)=>{
     e.preventDefault()
     setUser(formData)
+    history("/");
   }
   const confirm =(conf) =>{
     formData.password === conf && setEqPass(true)
