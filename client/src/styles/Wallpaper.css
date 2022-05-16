@@ -368,6 +368,7 @@
   .wall-bar {
     display: block;
     padding: 0.6rem;
+    color:white;
   }
   .wall-bar i {
     font-size: 2rem;

@@ -11,15 +11,13 @@ export default function Wallpaper({user, setUser, favs, usr}) {
   const [index, setIndex] = React.useState(1)
   const [searchIn, setSearchIn] = React.useState("");
   const [querys, setQuerys] = React.useState(`curated?page=${count}`)
-  const [fav, setFav] = React.useState(false)
-  // const [isSearch, setIsSearch] = React.useState(false)
   
   React.useEffect(() => {
     fetch(`https://api.pexels.com/v1/${querys}`, {
       method: "GET",
       headers: {
         Accept: "application/json",
-        Authorization: 'YOUR_API_KEY',
+        Authorization: 'YOUR_API_KEY_HERE',
       }
     })
       .then((res) => res.json())
@@ -72,15 +70,23 @@ export default function Wallpaper({user, setUser, favs, usr}) {
     tempDt[img] = datab[img].liked ? 
     {...tempDt[img], liked: false}: {...tempDt[img], liked: true}
     setData(tempDt)
-    console.log("chekin")
-
     if (!user){return}
+    // remove unliked images from the array
+    if (datab[img].liked) {
+      const unFav = user.favorites.indexOf(img)
+      user.favorites.splice(unFav, 1)
+      console.log(user.favorites)
+      return
+    }
+    //  Add loved images to user Favorites
     const faImg = datab[img]
     !user.favorites && setUser({...user, favorites: []})
     let tempUsr = user
+    if (tempUsr.favorites.includes(faImg)){console.log("match")}
     console.log("faImg", faImg)
     tempUsr.favorites = [...tempUsr.favorites, faImg]
     setUser(tempUsr)
+    console.log(user.favorites.indexOf(faImg))
     console.log("homes ", user)
   }
   useEffect(() => {
@@ -88,9 +94,7 @@ export default function Wallpaper({user, setUser, favs, usr}) {
     return
   }, [favs])
   
-  favs && console.log("favs open",favs)
   console.log(datab)
-   console.log("dtays",datab[3])
   const imageCard = datab.map((image) => {
     return (
       <div className="image-card trans" key={image.id} >
@@ -108,7 +112,7 @@ export default function Wallpaper({user, setUser, favs, usr}) {
   return (
     <div className="wallpaper">
       <div>
-        <Navigation user={user} fav={fav} setFav={setFav}/>
+        <Navigation user={user}/>
       </div>
       <div className="wall-header">
         {!usr? <section className="wallpaper-home trans" >
@@ -119,7 +123,7 @@ export default function Wallpaper({user, setUser, favs, usr}) {
         </div>
         <i onClick={() => prevImg()} className="fas fa-angle-left "></i>
         <i onClick={() => nextImg()} className="fas fa-angle-right "></i>
-           <ImageSelect image={datab[index]} />
+           <ImageSelect image={datab[index]} user={user} setUser={setUser} />
            </div>
            : ""}
           <div className="wallpaper-search trans">

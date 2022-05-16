@@ -3,15 +3,13 @@ import { Link } from "react-router-dom";
 import devsq1 from "../images/ripplelg.svg";
 import '../styles/Wallpaper.css'
 
-export default function Navigation({user, fav, setFav}) {
+export default function Navigation({user}) {
     var bar = false;
     function switchBar() {
         bar = !bar
   }
-  // console.log("navs ",user?.name.split(" "))
-const firstName = "wegt"
-  // const firstName = user?.name?.name.split(" ") || "w w" .charAt(0)
-  const favSwitch = () => {setFav(!fav)}
+  var firstName = null;
+  user && (firstName = user.name.split(" "))
   return (
     <div>
         <div className="wall-nav">
@@ -35,13 +33,14 @@ const firstName = "wegt"
                 <li className="trans wall-nav-txt">Upload</li>
                 <i className="fas fa-upload wall-nav-icon"></i>
               </Link>
-              <Link onClick={favSwitch} className="wall-nav-link trans" to="/favorites">
+              <Link className="wall-nav-link trans" to="/favorites">
                 <li className="trans wall-nav-txt">Favorites</li>
                 <i className="fas fa-heart wall-nav-icon trans"></i>
               </Link>
               <Link className="wall-nav-link trans" to={user? "/user":"/login"}>
-                <li className="trans wall-nav-txt">{user?firstName[0]: "Login"}</li>
-                <i className=" wall-nav-icon">{user?<div className="wall-icon-letter">{user.name}</div>: <i className="fa-solid fa-user trans"></i>}</i>
+                <li className="trans wall-nav-txt">{firstName? firstName[0]: "Login"}</li>
+                <i className=" wall-nav-icon">{user? <div className="wall-icon-letter">{user.name.charAt(0)}</div>: 
+                <i className="fa-solid fa-user trans"></i>}</i>
               </Link>
             </ul>
             <div onClick={switchBar} className="wall-bar trans">

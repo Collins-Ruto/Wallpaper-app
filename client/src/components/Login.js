@@ -31,8 +31,9 @@ function Login({user, setUser}) {
   console.log("user ",user)
   //value={formData.name}value={formData.email}
   return (
+    <>
+    <Navigation user={user} setUser={setUser}/>
     <div className="login-page">
-      <Navigation user={user} setUser={setUser}/>
         {user ? 
         <div>
             <h1>You are logged in, wanna go back to images</h1>
@@ -68,6 +69,7 @@ function Login({user, setUser}) {
         </div>
         </div>}
     </div>
+    </>
   )
 }
 
