@@ -13,11 +13,11 @@ export default function Wallpaper({user, setUser, favs, usr}) {
   const [querys, setQuerys] = React.useState(`curated?page=${count}`)
   
   React.useEffect(() => {
-    fetch(`https://api.pexels.com/v1/${querys}`, {
+    fetch(`https//api.pexels.com/v1/${querys}`, {
       method: "GET",
       headers: {
         Accept: "application/json",
-        Authorization: 'YOUR_API_KEY_HERE',
+        Authorization: '563492ad6f9170000100000181ae42c6ac634e868db6b9ef46ecfae6',
       }
     })
       .then((res) => res.json())
@@ -66,6 +66,7 @@ export default function Wallpaper({user, setUser, favs, usr}) {
     setIndex(newIdx)
   }
   function favImage(img){
+    if (!user) {return}
     let tempDt = [...datab]
     tempDt[img] = datab[img].liked ? 
     {...tempDt[img], liked: false}: {...tempDt[img], liked: true}
