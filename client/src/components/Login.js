@@ -1,18 +1,10 @@
 import React, {useState} from 'react'
 import { Link } from 'react-router-dom'
 import { useNavigate } from "react-router-dom";
-import {GoogleLogin} from 'react-google-login'
-
 import '../styles/Login.css'
 import Navigation from './Navigation'
+import GoogleAuth from './GoogleAuth';
 const initialState = {name:"", email:"", password:"", confPass:"", favorites:[]}
-
-const googleSuccess = (res) => {
-  console.log(res)
-}
-const googleFailure = () => {
-  console.log("Google sign in was unsuccessful")
-}
 
 function Login({user, setUser}) {
   const history = useNavigate()
@@ -72,18 +64,7 @@ function Login({user, setUser}) {
                 <small>{!eqPass? "Passwords do not match!": ""}</small>
                 <button onClick={(e)=>submit(e)}>Sign Up</button>
             </form> }
-            <GoogleLogin
-            clientId="508452009550-ph4gq5i63fjlkgafrvi5dg064p5h3e78.apps.googleusercontent.com"
-            render={(renderProps) => {
-              <button className="google-sign" onClick={renderProps.onClick} disabled={renderProps.disabled}><i className="fa-brands fa-google"></i>  Sign in with Google</button>
-            }}
-            buttonText="Login"
-            onSuccess={googleSuccess}
-            onFailure={googleFailure}
-            cookiePolicy="single_host_origin"
-
-            />
-            
+            <GoogleAuth user={user} setUser={setUser} />
             <h4>{isSigned? "Don't": "Already"} have an account? <span onClick={()=>setIsSigned((prev)=>!prev)}>{isSigned? "Sign up": "Sign In"}</span></h4>
         </div>
         </div>}
