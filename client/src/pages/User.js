@@ -16,7 +16,7 @@ export default function User({user, setUser}) {
       <div className="user-page">
             <div className='usr-bar' >
               <div className='user-pro'>
-                <img src={profile}  alt=""></img>
+                <img src={user.image || profile}  alt=""></img>
                 <h1>{user.name}</h1>
                 <h3>{user.about || ""}</h3>
                 <button onClick={logout}>LogOut</button>

@@ -56,23 +56,7 @@ const GoogleAuth = ({user, setUser}) => {
     setUser({...user, name: userData.name, email: userData.email, image: userData.picture})    
   }
 console.log("user ", user)
-//   const data = {{
-  // {name: userData.given_name, email: userData.email, image: userData.picture}
-//     "iss": "https://accounts.google.com",
-//     "nbf": 1652799404,
-//     "aud": "508452009550-ph4gq5i63fjlkgafrvi5dg064p5h3e78.apps.googleusercontent.com",
-//     "sub": "114330761752991825331",
-//     "email": "villescollins@gmail.com",
-//     "email_verified": true,
-//     "azp": "508452009550-ph4gq5i63fjlkgafrvi5dg064p5h3e78.apps.googleusercontent.com",
-//     "name": "Collins Villes",
-//     "picture": "https://lh3.googleusercontent.com/a/AATXAJze1UfhzQwTeQtK9jhX5Vxiy9MTpoQmmoP5wONV=s96-c",
-//     "given_name": "Collins",
-//     "family_name": "Villes",
-//     "iat": 1652799704,
-//     "exp": 1652803304,
-//     "jti": "5bbe3b6848abc5b024935ff2f7f0265546ba6da2"
-// }}
+
 
   return (
     <div ref={googleButton}

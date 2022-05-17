@@ -6,6 +6,7 @@
 
 .user-pro img{
     width: 10rem;
+    border-radius: 50%;
 }
 .user-page h1 {
     font-size:2.5rem;
