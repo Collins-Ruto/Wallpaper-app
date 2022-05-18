@@ -22,6 +22,7 @@ function Login({user, setUser}) {
     e.preventDefault()
     setUser(formData)
     history("/");
+    localStorage.setItem("user", JSON.stringify(formData))
   }
   const confirm =(conf) =>{
     formData.password === conf && setEqPass(true)

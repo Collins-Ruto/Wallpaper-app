@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react'
+import {useNavigate} from 'react-router-dom'
 
   const loadScript = (src) =>
   new Promise((resolve, reject) => {
@@ -11,6 +12,8 @@ import { useEffect, useRef } from 'react'
   })
 
 const GoogleAuth = ({user, setUser}) => {
+
+  const history = useNavigate()
 
   const googleButton = useRef(null);
 
@@ -54,6 +57,7 @@ const GoogleAuth = ({user, setUser}) => {
     const userData = (parseJwt(response.credential))
     console.log(userData);
     setUser({...user, name: userData.name, email: userData.email, image: userData.picture})    
+    userData && history("/")
   }
 console.log("user ", user)
 

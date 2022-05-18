@@ -24,6 +24,13 @@ export default function Wallpaper({user, setUser, favs, usr}) {
       .then((data) =>!favs && setData((prev) => prev.concat(data.photos)));
     return () => {};
   }, [count, favs, querys])
+
+  useEffect(() => {
+  const locUser = JSON.parse(localStorage.getItem('user'));
+  if (locUser) {
+   !user && setUser(locUser);
+  }
+}, [setUser, user]);
   
   function nextPage() {
     setcount((count) => count + 1);
@@ -87,6 +94,7 @@ export default function Wallpaper({user, setUser, favs, usr}) {
     console.log("faImg", faImg)
     tempUsr.favorites = [...tempUsr.favorites, faImg]
     setUser(tempUsr)
+    localStorage.setItem("user", JSON.stringify(tempUsr))
     console.log(user.favorites.indexOf(faImg))
     console.log("homes ", user)
   }

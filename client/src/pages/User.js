@@ -9,6 +9,7 @@ export default function User({user, setUser}) {
   const history = useNavigate()
   const logout = ()=> {
     setUser(null)
+    localStorage.removeItem('user')
     history("/");
   }
   return (
