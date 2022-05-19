@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, { useState} from 'react'
 import { Link } from 'react-router-dom'
 import { useNavigate } from "react-router-dom";
 import axios from "axios"
@@ -12,6 +12,7 @@ function Login({user, setUser}) {
   const [formData, setFormData] = useState(initialState)
   const [eqPass, setEqPass] = useState(true)
   const [isSigned, setIsSigned] = useState(false)
+  
   const userHandler =(e) => {
     e.preventDefault()
     console.log(e.target.value)
@@ -20,12 +21,17 @@ function Login({user, setUser}) {
     }
   const submit =(e)=>{
     e.preventDefault()
-    setUser(formData)
     history("/");
-    localStorage.setItem("user", JSON.stringify(formData))
     console.log("data ax ",formData)
     axios.post('http://localhost:5000/users', formData)
-    .then(res => console.log("axios", res.data))
+    .then(res => {
+      localStorage.setItem("user", JSON.stringify(res.data))
+        console.log("axios", res.data)
+      })
+      .catch ((error) => {
+        console.log("seems the email is already used", error)
+        history("/login")
+      })
   }
   const signIn =(e)=>{
     e.preventDefault()

@@ -27,8 +27,9 @@ export default function Wallpaper({user, setUser, favs, usr}) {
 
   useEffect(() => {
   const locUser = JSON.parse(localStorage.getItem('user'));
+  console.log(locUser)
   if (locUser) {
-   !user && setUser(locUser);
+   !user && setUser(locUser.result);
   }
 }, [setUser, user]);
   

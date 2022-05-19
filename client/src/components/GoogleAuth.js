@@ -57,9 +57,10 @@ const GoogleAuth = ({user, setUser}) => {
   function handleCredentialResponse(response) {
     const userData = (parseJwt(response.credential))
     console.log(userData);
-    setUser({...user, name: userData.name, email: userData.email, image: userData.picture})    
+    const User = { result : { name: userData.name, email: userData.email, image: userData.picture}}
+    console.log("google user",User)
     userData && history("/")
-
+    localStorage.setItem("user", JSON.stringify(User))
     const postData = {name: userData.name, email: userData.email, image: userData.picture}
     axios.post('http://localhost:5000/users', postData)
     .then(res => console.log("axios gog", res.data))
