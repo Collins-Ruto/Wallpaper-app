@@ -37,7 +37,7 @@ export const createUsers = async (req, res) => {
         const existUser = await UserData.findOne({ email })
 
         if (existUser) {
-            return res.status(404).json({message: 'User already exists'}) }
+            return res.status(406).json({message: 'User already exists',}) }
         
         if (password !== confPass) return res.status(403).json({message: 'Passwords do not match'})
 
