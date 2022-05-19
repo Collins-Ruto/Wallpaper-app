@@ -13,7 +13,7 @@ export default function Wallpaper({user, setUser, favs, usr}) {
   const [querys, setQuerys] = React.useState(`curated?page=${count}`)
   
   React.useEffect(() => {
-    fetch(`https://api.pexels.com/v1/${querys}`, {
+    fetch(`https//api.pexels.com/v1/${querys}`, {
       method: "GET",
       headers: {
         Accept: "application/json",

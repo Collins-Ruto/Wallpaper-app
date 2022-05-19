@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react'
 import {useNavigate} from 'react-router-dom'
+import axios from 'axios'
 
   const loadScript = (src) =>
   new Promise((resolve, reject) => {
@@ -58,6 +59,10 @@ const GoogleAuth = ({user, setUser}) => {
     console.log(userData);
     setUser({...user, name: userData.name, email: userData.email, image: userData.picture})    
     userData && history("/")
+
+    const postData = {name: userData.name, email: userData.email, image: userData.picture}
+    axios.post('http://localhost:5000/users', postData)
+    .then(res => console.log("axios gog", res.data))
   }
 console.log("user ", user)
 
