@@ -1,6 +1,9 @@
 import UserData from '../models/userData.js'
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcrypt'
+import mongoose from 'mongoose'
+
+const ObjectId = mongoose.Types.ObjectId;
 
 export const getUsers = async (req, res) => {
     try {
@@ -54,20 +57,36 @@ export const createUsers = async (req, res) => {
 }
 
 export const editUsers = async (req, res) => {
+
+    const {userId, image} = req.body
+    const _id = ObjectId(userId)
+    
     try {
-        
+        const upUser = await UserData.findOne({ _id})
+        const updateUser = await UserData.updateOne(
+            {_id: _id},
+            {$push: {favorites: image}}
+        )
+        res.status(200).json({result: upUser})
     } catch (error) {
         console.log(error.message)
     }
-    res.send("user edit route works")
 }
 
 export const deleteUsers = async (req, res) => {
+    
+    const {userId, imageId} = req.body;
+    const _id = ObjectId(userId)
+    console.log(imageId)
     try {
-        
+        const delUser = await UserData.findOne({_id})
+        const deldata = await UserData.deleteOne(
+            {_id: _id},
+            {$pull: {favorites: {id: imageId}}}
+        )
+        res.status(200).json({result: delUser})
     } catch (error) {
         console.log(error.message)
     }
-    res.send("user delete route works")
 }
 
