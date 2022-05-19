@@ -14,6 +14,15 @@ export const getUsers = async (req, res) => {
         console.log(error.message)
     }
 }
+export const getData = async (req, res) => {
+    try {
+        const userData = await images.find()
+
+        res.status(200).json(userData)
+    } catch (error) {
+        console.log(error.message)
+    }
+}
 export const getUser = async (req, res) => {
     const {email, password} = req.body
     console.log(req.body)
@@ -32,7 +41,22 @@ export const getUser = async (req, res) => {
         res.status(500).json({message : "something went wrong", error: error})
     }
 }
+export const googleLogin = async (req, res) => {
+    const {email, name, image} = req.body
+    console.log(email)
+    try {
+        const existUser = await UserData.findOne({ email })
 
+        if (existUser) {
+            return res.status(200).json({result: existUser})
+        } else {
+            const result = await UserData.create({email, name, image: image})
+        }
+    } catch (error) {
+        res.status(500).json({message : "something went wrong", error: error})
+    }
+
+}
 export const createUsers = async (req, res) => {
     const {name, email, password, confPass} = req.body
 
@@ -62,11 +86,11 @@ export const addFavorites = async (req, res) => {
     const _id = ObjectId(userId)
     
     try {
-        const upUser = await UserData.findOne({ _id})
         const updateUser = await UserData.updateOne(
             {_id: _id},
             {$push: {favorites: image}}
         )
+        const upUser = await UserData.findOne({ _id})
         res.status(200).json({result: upUser})
     } catch (error) {
         console.log(error.message)
@@ -79,12 +103,12 @@ export const deleteFavorites = async (req, res) => {
     const _id = ObjectId(userId)
     console.log(imageId)
     try {
-        const user = await UserData.findOne({_id})
         const deldata = await UserData.updateOne(
             {_id: _id},
             {$pull: {favorites: {id: imageId}}},
             {multi : true} 
         )
+        const user = await UserData.findOne({_id})
         res.status(200).json({result: user})
     } catch (error) {
         console.log(error.message)

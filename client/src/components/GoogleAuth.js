@@ -60,10 +60,12 @@ const GoogleAuth = ({user, setUser}) => {
     const User = { result : { name: userData.name, email: userData.email, image: userData.picture}}
     console.log("google user",User)
     userData && history("/")
-    localStorage.setItem("user", JSON.stringify(User))
+    
     const postData = {name: userData.name, email: userData.email, image: userData.picture}
-    axios.post('http://localhost:5000/users', postData)
-    .then(res => console.log("axios gog", res.data))
+    axios.post('http://localhost:5000/users/google', postData)
+    .then(res => {
+      localStorage.setItem("user", JSON.stringify(res.data))
+      console.log("axios gog", res.data)})
   }
 console.log("user ", user)
 

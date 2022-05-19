@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useEffect } from "react";
 import ImageSelect from "../components/ImageSelect";
 import Navigation from "../components/Navigation";
@@ -13,7 +14,7 @@ export default function Wallpaper({user, setUser, favs, usr}) {
   const [querys, setQuerys] = React.useState(`curated?page=${count}`)
   
   React.useEffect(() => {
-    fetch(`https//api.pexels.com/v1/${querys}`, {
+    fetch(`https://api.pexels.com/v1/${querys}`, {
       method: "GET",
       headers: {
         Accept: "application/json",
@@ -27,7 +28,7 @@ export default function Wallpaper({user, setUser, favs, usr}) {
 
   useEffect(() => {
   const locUser = JSON.parse(localStorage.getItem('user'));
-  console.log(locUser)
+  // console.log("refresh",locUser)
   if (locUser) {
    !user && setUser(locUser.result);
   }
@@ -37,9 +38,8 @@ export default function Wallpaper({user, setUser, favs, usr}) {
     setcount((count) => count + 1);
     setQuerys(`curated?page=${count + 1}`)
   }
-  console.log(count, querys)
   
-  //https://api.imgflip.com/get_memes)
+  //https://api.imgflip.com/get_memes) => api for free unlimited access to meme images
   function imgSearch(e) {
     const search = e.target.value
     if (search === "") {
@@ -50,12 +50,13 @@ export default function Wallpaper({user, setUser, favs, usr}) {
     setData([])
     setQuerys(`search?query=${search}&page=${count}`)
   }
-
+  // click handler for images
   function clickHandler(img, index) {
     setImage(img)
     setIndex(index)
-    console.log("click", index, datab[index].url)
+    // console.log("click", index, datab[index].url)
   }
+  // switch to next image
   function nextImg(){
     if (index === datab.length - 2) {
       nextPage()
@@ -64,6 +65,7 @@ export default function Wallpaper({user, setUser, favs, usr}) {
     setImage(datab[newIdx].url)
     setIndex(newIdx)
   }
+  // switch to previous image
   function prevImg(){
     if (index === 0) {
       var newIdx = datab.length - 1
@@ -73,6 +75,7 @@ export default function Wallpaper({user, setUser, favs, usr}) {
     setImage(datab[newIdx].url)
     setIndex(newIdx)
   }
+  // Favorite images management
   function favImage(img){
     if (!user) {return}
     let tempDt = [...datab]
@@ -80,31 +83,37 @@ export default function Wallpaper({user, setUser, favs, usr}) {
     {...tempDt[img], liked: false}: {...tempDt[img], liked: true}
     setData(tempDt)
     if (!user){return}
-    // remove unliked images from the array
+    
+    // remove unliked images from the favorites array
     if (datab[img].liked) {
+      const deleteFav = {userId: user._id, imageId: datab[img].id}
       const unFav = user.favorites.indexOf(img)
       user.favorites.splice(unFav, 1)
       console.log(user.favorites)
+      console.log("delete", deleteFav)
+      axios.delete("http://localhost:5000/users/favorites",{data: deleteFav})
+    .then(res => {
+      localStorage.setItem("user", JSON.stringify(res.data))
+      console.log(res)})
+      setUser()
       return
-    }
-    //  Add loved images to user Favorites
-    const faImg = datab[img]
-    !user.favorites && setUser({...user, favorites: []})
-    let tempUsr = user
-    if (tempUsr.favorites.includes(faImg)){console.log("match")}
-    console.log("faImg", faImg)
-    tempUsr.favorites = [...tempUsr.favorites, faImg]
-    setUser(tempUsr)
-    localStorage.setItem("user", JSON.stringify(tempUsr))
-    console.log(user.favorites.indexOf(faImg))
+     }
+
+    //  Add loved images to user Favorites in database    
+    const updateFav = {userId: user._id, image: datab[img]}
     console.log("homes ", user)
+    axios.put("http://localhost:5000/users/favorites", updateFav)
+    .then(res => {
+      localStorage.setItem("user", JSON.stringify(res.data))
+      console.log(res)})
+      setUser()
   }
+  // show favorite images on favorite and user tabs
   useEffect(() => {
     favs && setData(favs)
     return
   }, [favs])
   
-  console.log(datab)
   const imageCard = datab.map((image) => {
     return (
       <div className="image-card trans" key={image.id} >
