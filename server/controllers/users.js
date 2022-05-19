@@ -56,7 +56,7 @@ export const createUsers = async (req, res) => {
     }
 }
 
-export const editUsers = async (req, res) => {
+export const addFavorites = async (req, res) => {
 
     const {userId, image} = req.body
     const _id = ObjectId(userId)
@@ -73,18 +73,19 @@ export const editUsers = async (req, res) => {
     }
 }
 
-export const deleteUsers = async (req, res) => {
+export const deleteFavorites = async (req, res) => {
     
     const {userId, imageId} = req.body;
     const _id = ObjectId(userId)
     console.log(imageId)
     try {
-        const delUser = await UserData.findOne({_id})
-        const deldata = await UserData.deleteOne(
+        const user = await UserData.findOne({_id})
+        const deldata = await UserData.updateOne(
             {_id: _id},
-            {$pull: {favorites: {id: imageId}}}
+            {$pull: {favorites: {id: imageId}}},
+            {multi : true} 
         )
-        res.status(200).json({result: delUser})
+        res.status(200).json({result: user})
     } catch (error) {
         console.log(error.message)
     }
