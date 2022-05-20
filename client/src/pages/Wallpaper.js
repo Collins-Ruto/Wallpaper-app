@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import ImageSelect from "../components/ImageSelect";
 import Navigation from "../components/Navigation";
 import "../styles/Wallpaper.css";
@@ -12,6 +12,9 @@ export default function Wallpaper({user, setUser, favs, usr}) {
   const [index, setIndex] = React.useState(1)
   const [searchIn, setSearchIn] = React.useState("");
   const [querys, setQuerys] = React.useState(`curated?page=${count}`)
+  const [favIdd, setFavIdd] = React.useState()
+  const favIds = useMemo(() => [], []) 
+  const allImgIds = []
   
   React.useEffect(() => {
     fetch(`https://api.pexels.com/v1/${querys}`, {
@@ -54,7 +57,6 @@ export default function Wallpaper({user, setUser, favs, usr}) {
   function clickHandler(img, index) {
     setImage(img)
     setIndex(index)
-    // console.log("click", index, datab[index].url)
   }
   // switch to next image
   function nextImg(){
@@ -85,48 +87,68 @@ export default function Wallpaper({user, setUser, favs, usr}) {
     if (!user){return}
     
     // remove unliked images from the favorites array
-    if (datab[img].liked) {
+    if (favIds.includes(datab[img].id)) {
       const deleteFav = {userId: user._id, imageId: datab[img].id}
       const unFav = user.favorites.indexOf(img)
+      const unFavId = favIds.indexOf(datab[img].id)
+      console.log("unfav 1", favIds)
       user.favorites.splice(unFav, 1)
+      favIds.splice(favIds[unFavId], 1)
+      console.log("unfav 2", favIds)
       console.log(user.favorites)
-      console.log("delete", deleteFav)
       axios.delete("http://localhost:5000/users/favorites",{data: deleteFav})
-    .then(res => {
-      localStorage.setItem("user", JSON.stringify(res.data))
-      console.log(res)})
-      setUser()
+        .then(res => {
+          localStorage.setItem("user", JSON.stringify(res.data))
+          console.log(res)})
       return
      }
 
-    //  Add loved images to user Favorites in database    
+    //  Add loved images to user Favorites in database
+    if (!favIds.includes(datab[img].id)) {
+    favIds.push(datab[img].id)
+    user.favorites.push(datab[img])
     const updateFav = {userId: user._id, image: datab[img]}
     console.log("homes ", user)
     axios.put("http://localhost:5000/users/favorites", updateFav)
-    .then(res => {
-      localStorage.setItem("user", JSON.stringify(res.data))
-      console.log(res)})
-      setUser()
-  }
+      .then(res => {
+        localStorage.setItem("user", JSON.stringify(res.data))
+        console.log(res)})
+  }}
   // show favorite images on favorite and user tabs
   useEffect(() => {
     favs && setData(favs)
     return
   }, [favs])
+
+  // Get id of all images on the users favorites list and give them the liked emoji
+  for (let image in user?.favorites) {
+    favIds.push(user.favorites[image].id)
+    // console.log(favIds)
+  }
+  useEffect(() => {
+    setFavIdd(favIds)
+  }, [favIds])
   
+  console.log(favIdd)
+
   const imageCard = datab.map((image) => {
+    if (allImgIds.includes(image.id)) {
+      // eslint-disable-next-line array-callback-return
+      return
+    } else {
+    allImgIds.push(image.id);
     return (
       <div className="image-card trans" key={image.id} >
         <img onClick={() => clickHandler(image, datab.indexOf(image))} src={image.src.large} alt=""></img>
         <div className="image-act">
-          {!image.liked ? <i onClick={() => favImage(datab.indexOf(image))} className="fa-regular fa-heart" aria-hidden="true"></i>
+          {!favIdd.includes(image.id) ? <i onClick={() => favImage(datab.indexOf(image))} className="fa-regular fa-heart" aria-hidden="true"></i>
           : <i onClick={() => favImage(datab.indexOf(image))} className="fa-solid fa-heart image-favs" aria-hidden="true"></i>}
           <i className="fa-regular fa-circle-down"></i>
           <i className="fa fa-share" aria-hidden="true"></i>
         </div>
       </div>
     );
-  });
+  }});
 
   return (
     <div className="wallpaper">
