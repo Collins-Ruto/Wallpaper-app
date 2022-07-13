@@ -23,7 +23,7 @@ function Login({user, setUser}) {
     e.preventDefault()
     history("/");
     console.log("data ax ",formData)
-    axios.post('http://localhost:5000/users', formData)
+    axios.post('https://wallpapers-api.herokuapp.com/users', formData)
     .then(res => {
       localStorage.setItem("user", JSON.stringify(res.data))
         console.log("axios", res.data)
@@ -37,7 +37,7 @@ function Login({user, setUser}) {
     e.preventDefault()
     history("/");
     console.log("data ax get ",formData)
-    axios.post('http://localhost:5000/users/signin', formData)
+    axios.post('https://wallpapers-api.herokuapp.com/users/signin', formData)
     .then(res => {
       localStorage.setItem("user", JSON.stringify(res.data))
         console.log("axios", res.data)
