@@ -3,6 +3,7 @@
 Created web this application Reactjs <br>
 The images are sourced by the pexels api which is free and very resourcefull <br>
 It incoporates realtime image search with input in search parameters <br>
+The user management api is available at [wallpapers-api.herokuapp.com](https://wallpapers-api.herokuapp.com) , I will create a documentation on its usage soon <br>
 For demonstration purposer the version uploaded here uses a memes api due to it's free to use policy<br>
 I have added a backend serice using MongoDB noSql database to store user information and images<Br>
 This has also enabled me to store favorite photos of the users which they can access from any device whatsoever when logged in.<br>
