@@ -62,7 +62,7 @@ const GoogleAuth = ({user, setUser}) => {
     userData && history("/")
     
     const postData = {name: userData.name, email: userData.email, image: userData.picture}
-    axios.post('http://localhost:5000/users/google', postData)
+    axios.post('https://wallpapers-api.herokuapp.com/users/google', postData)
     .then(res => {
       localStorage.setItem("user", JSON.stringify(res.data))
       console.log("axios gog", res.data)})
