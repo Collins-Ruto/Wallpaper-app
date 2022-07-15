@@ -21,7 +21,7 @@ export default function Wallpaper({user, setUser, favs, usr}) {
       method: "GET",
       headers: {
         Accept: "application/json",
-        Authorization: 'PEXELS_API_KEY',
+        Authorization: process.env.PEXELS_API_KEY,
       }
     })
       .then((res) => res.json())
