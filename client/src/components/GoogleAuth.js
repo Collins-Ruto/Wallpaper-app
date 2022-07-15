@@ -20,7 +20,8 @@ const GoogleAuth = ({user, setUser}) => {
 
   useEffect(() => {
     const src = 'https://accounts.google.com/gsi/client'
-    const id = ""
+    const id =
+      "GOOGLE_API_KEY";
 
     loadScript(src)
       .then(() => {

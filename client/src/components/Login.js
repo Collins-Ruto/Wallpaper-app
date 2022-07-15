@@ -5,6 +5,7 @@ import axios from "axios"
 import '../styles/Login.css'
 import Navigation from './Navigation'
 import GoogleAuth from './GoogleAuth';
+
 const initialState = {name:"", email:"", password:"", favorites:[]}
 
 function Login({user, setUser}) {
@@ -47,49 +48,109 @@ function Login({user, setUser}) {
     formData.password === conf && setEqPass(true)
     formData.password !== conf && setEqPass(false)
   }
+
   console.log("data ",formData)
   console.log("user ",user)
   return (
-    <>
-    <Navigation user={user} setUser={setUser}/>
-    <div className="login-page">
-        {user ? 
-        <div>
+    <div>
+      <Navigation user={user} setUser={setUser} />
+      <div className="login-page">
+        {user ? (
+          <div>
             <h1>You are logged in, wanna go back to images</h1>
-            <Link to="/" className="back-btn">Back Home</Link>
-        </div> : 
-        <div className="login-cont">
-          <i className="fa fa-user" aria-hidden="true"></i>
+            <Link to="/" className="back-btn">
+              Back Home
+            </Link>
+          </div>
+        ) : (
+          <div className="login-cont">
+            <i className="fa fa-user" aria-hidden="true"></i>
             <h3>Sign up</h3>
             <div>
-              {isSigned ? <div>
-                <form onChange={(e)=>userHandler(e)} onSubmit={(e)=>signIn(e)}>
+              {isSigned ? (
+                <div>
+                  <form
+                    onChange={(e) => userHandler(e)}
+                    onSubmit={(e) => signIn(e)}
+                  >
+                    <label htmlFor="email">Your Email</label>
+                    <input
+                      type="email"
+                      name="email"
+                      id="email"
+                      onChange={() => {}}
+                      value={formData.email}
+                      required
+                    />
+                    <label htmlFor="password">Password</label>
+                    <input
+                      type="password"
+                      name="password"
+                      id="password"
+                      onChange={() => {}}
+                      value={formData.password}
+                      required
+                    />
+                    <button onClick={(e) => signIn(e)}>Sign In</button>
+                  </form>
+                </div>
+              ) : (
+                <form
+                  onChange={(e) => userHandler(e)}
+                  onSubmit={(e) => submit(e)}
+                >
+                  <label htmlFor="name">Your Name</label>
+                  <input
+                    type="text"
+                    name="name"
+                    id="name"
+                    onChange={() => {}}
+                    required
+                  />
                   <label htmlFor="email">Your Email</label>
-                <input type="email" name="email" id="email" onChange={()=>{}} value={formData.email} required/>
-                <label htmlFor="password">Password</label>
-                <input type="password" name="password" id="password" onChange={()=>{}} value={formData.password} required/>
-                <button onClick={(e)=>signIn(e)}>Sign In</button>
+                  <input
+                    type="email"
+                    name="email"
+                    id="email"
+                    onChange={() => {}}
+                    value={formData.email}
+                    required
+                  />
+                  <label htmlFor="password">Password</label>
+                  <input
+                    type="password"
+                    name="password"
+                    id="password"
+                    onChange={() => {}}
+                    value={formData.password}
+                    required
+                  />
+                  <label htmlFor="conf-pass">Confirm Password</label>
+                  <input
+                    type="password"
+                    name="confPass"
+                    id="conf-pass"
+                    onChange={() => {}}
+                    value={formData.confPass}
+                    required
+                  />
+                  <small>{!eqPass ? "Passwords do not match!" : ""}</small>
+                  <button onClick={(e) => submit(e)}>Sign Up</button>
                 </form>
-              </div> :
-            <form onChange={(e)=>userHandler(e)} onSubmit={(e)=>submit(e)}>
-                <label htmlFor="name">Your Name</label>
-                <input type="text" name="name"  id="name" onChange={()=>{}} required/>
-                <label htmlFor="email">Your Email</label>
-                <input type="email" name="email" id="email" onChange={()=>{}} value={formData.email} required/>
-                <label htmlFor="password">Password</label>
-                <input type="password" name="password" id="password" onChange={()=>{}} value={formData.password} required/>
-                <label htmlFor="conf-pass">Confirm Password</label>
-                <input type="password" name="confPass" id="conf-pass" onChange={()=>{}} value={formData.confPass} required/>
-                <small>{!eqPass? "Passwords do not match!": ""}</small>
-                <button onClick={(e)=>submit(e)}>Sign Up</button>
-            </form> }
-            <GoogleAuth user={user} setUser={setUser} />
-            <h4>{isSigned? "Don't": "Already"} have an account? <span onClick={()=>setIsSigned((prev)=>!prev)}>{isSigned? "Sign up": "Sign In"}</span></h4>
-        </div>
-        </div>}
+              )}
+              <GoogleAuth user={user} setUser={setUser} />
+              <h4>
+                {isSigned ? "Don't" : "Already"} have an account?{" "}
+                <span onClick={() => setIsSigned((prev) => !prev)}>
+                  {isSigned ? "Sign up" : "Sign In"}
+                </span>
+              </h4>
+            </div>
+          </div>
+        )}
+      </div>
     </div>
-    </>
-  )
+  );
 }
 
 export default Login
