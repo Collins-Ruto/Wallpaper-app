@@ -27,6 +27,7 @@ function Login({user, setUser}) {
     axios.post('https://wallpapers-api.herokuapp.com/users', formData)
     .then(res => {
       localStorage.setItem("user", JSON.stringify(res.data))
+      setUser(res.data.result);
         console.log("axios", res.data)
       })
       .catch ((error) => {
@@ -41,6 +42,7 @@ function Login({user, setUser}) {
     axios.post('https://wallpapers-api.herokuapp.com/users/signin', formData)
     .then(res => {
       localStorage.setItem("user", JSON.stringify(res.data))
+      setUser(res.data.result);
         console.log("axios", res.data)
       })
   }

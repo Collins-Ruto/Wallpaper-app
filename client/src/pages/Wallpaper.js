@@ -30,12 +30,12 @@ export default function Wallpaper({user, setUser, favs, usr}) {
   }, [count, favs, querys])
 
   useEffect(() => {
-  const locUser = JSON.parse(localStorage.getItem('user'));
-  // console.log("refresh",locUser)
-  if (locUser) {
-   !user && setUser(locUser.result);
-  }
-}, [setUser, user]);
+    const locUser = JSON.parse(localStorage.getItem('user'));
+    // console.log("refresh",locUser)
+    if (locUser) {
+    !user && setUser(locUser.result);
+    }
+  }, [setUser, user]);
   
   function nextPage() {
     setcount((count) => count + 1);
@@ -96,10 +96,14 @@ export default function Wallpaper({user, setUser, favs, usr}) {
       favIds.splice(favIds[unFavId], 1)
       console.log("unfav 2", favIds)
       console.log(user.favorites)
-      axios.delete("http://localhost:5000/users/favorites",{data: deleteFav})
-        .then(res => {
-          localStorage.setItem("user", JSON.stringify(res.data))
-          console.log(res)})
+      axios
+        .delete("https://wallpapers-api.herokuapp.com/users/favorites", {
+          data: deleteFav,
+        })
+        .then((res) => {
+          localStorage.setItem("user", JSON.stringify(res.data));
+          console.log(res);
+        });
       return
      }
 
@@ -109,10 +113,12 @@ export default function Wallpaper({user, setUser, favs, usr}) {
     user.favorites.push(datab[img])
     const updateFav = {userId: user._id, image: datab[img]}
     console.log("homes ", user)
-    axios.put("http://localhost:5000/users/favorites", updateFav)
-      .then(res => {
-        localStorage.setItem("user", JSON.stringify(res.data))
-        console.log(res)})
+    axios
+      .put("https://wallpapers-api.herokuapp.com/users/favorites", updateFav)
+      .then((res) => {
+        localStorage.setItem("user", JSON.stringify(res.data));
+        console.log(res);
+      });
   }}
   // show favorite images on favorite and user tabs
   useEffect(() => {
