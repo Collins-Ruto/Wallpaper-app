@@ -21,11 +21,11 @@ export default function Wallpaper({user, setUser, favs, usr}) {
       method: "GET",
       headers: {
         Accept: "application/json",
-        Authorization: process.env.PEXELS_API_KEY,
-      }
+        Authorization: process.env.REACT_APP_PEXELS_API,
+      },
     })
       .then((res) => res.json())
-      .then((data) =>!favs && setData((prev) => prev.concat(data.photos)));
+      .then((data) => !favs && setData((prev) => prev.concat(data.photos)));
     return () => {};
   }, [count, favs, querys])
 

@@ -4,7 +4,7 @@ import Favorites from "./pages/Favorites";
 import User from "./pages/User";
 import Upload from "./pages/Upload";
 import Wallpaper from "./pages/Wallpaper";
-import Login from "./components/Login";
+import Login from "./pages/Login";
 
 function App() {
   const [user, setUser] = useState(null)
