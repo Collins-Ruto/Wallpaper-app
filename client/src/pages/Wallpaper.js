@@ -155,8 +155,8 @@ export default function Wallpaper({user, setUser, favs, usr}) {
     const randomColor = colors[Math.floor(Math.random()*colors.length)]
     return (
       <div key={n} className="skeleton-card image-card">
-        <div className="skeleton-img" style={{height: "400px", width: "280px", opacity: "", background:randomColor}}>
-        <div className="skeleton-img2" style={{height: "400px", width: "280px", background:randomColor}}></div>
+        <div className="skeleton-img" style={{ opacity: "", background:randomColor}}>
+        <div className="skeleton-img2" style={{height: "500px", width: "280px", background:randomColor}}></div>
         </div>
         <div className="skeleton-act image-act">
           <i className="fa-solid fa-heart image-favs" aria-hidden="true"></i>
