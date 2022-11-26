@@ -3,6 +3,7 @@ import React, { useEffect, useMemo } from "react";
 import ImageSelect from "../components/ImageSelect";
 import Navigation from "../components/Navigation";
 import "../styles/Wallpaper.css";
+import "../styles/animation.css";
 
 export default function Wallpaper({user, setUser, favs, usr}) {
   
@@ -139,10 +140,24 @@ export default function Wallpaper({user, setUser, favs, usr}) {
   
   console.log(favIdd)
 
+  const colors = [
+    "#725d61",
+    "#715d72",
+    "#5d6172",
+    "#5d7272",
+    "#725e5d",
+    "#63725d",
+    "#70725d",
+    "#72655d",
+  ];
+
   const skeleton = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15].map((n) => {
+    const randomColor = colors[Math.floor(Math.random()*colors.length)]
     return (
       <div key={n} className="skeleton-card image-card">
-        <div className="skeleton-img" style={{height: "400px", width: "280px", background:"#E5E4E2"}}></div>
+        <div className="skeleton-img" style={{height: "400px", width: "280px", opacity: "", background:randomColor}}>
+        <div className="skeleton-img2" style={{height: "400px", width: "280px", background:randomColor}}></div>
+        </div>
         <div className="skeleton-act image-act">
           <i className="fa-solid fa-heart image-favs" aria-hidden="true"></i>
           <i className="fa-regular fa-circle-down"></i>
