@@ -9,6 +9,7 @@ export default function Wallpaper({user, setUser, favs, usr}) {
   const [datab, setData] = React.useState([]);
   const [count, setcount] = React.useState(2);
   const [image, setImage] = React.useState();
+  const [loading, setLoading] = React.useState(true);
   const [index, setIndex] = React.useState(1)
   const [searchIn, setSearchIn] = React.useState("");
   const [querys, setQuerys] = React.useState(`curated?page=${count}`)
@@ -25,7 +26,8 @@ export default function Wallpaper({user, setUser, favs, usr}) {
       },
     })
       .then((res) => res.json())
-      .then((data) => !favs && setData((prev) => prev.concat(data.photos)));
+      .then((data) => !favs && setData((prev) => prev.concat(data.photos)))
+      .then(() => setLoading(false));
     return () => {};
   }, [count, favs, querys])
 
@@ -137,6 +139,20 @@ export default function Wallpaper({user, setUser, favs, usr}) {
   
   console.log(favIdd)
 
+  const skeleton = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15].map((n) => {
+    return (
+      <div key={n} className="skeleton-card image-card">
+        <div className="skeleton-img" style={{height: "400px", width: "280px", background:"#E5E4E2"}}></div>
+        <div className="skeleton-act image-act">
+          <i className="fa-solid fa-heart image-favs" aria-hidden="true"></i>
+          <i className="fa-regular fa-circle-down"></i>
+          <i className="fa fa-share" aria-hidden="true"></i>
+        </div>
+      </div>
+    );
+    }
+  );
+
   const imageCard = datab.map((image) => {
     if (allImgIds.includes(image.id)) {
       // eslint-disable-next-line array-callback-return
@@ -144,15 +160,15 @@ export default function Wallpaper({user, setUser, favs, usr}) {
     } else {
     allImgIds.push(image.id);
     return (
-      <div className="image-card trans" key={image.id} >
-        <img onClick={() => clickHandler(image, datab.indexOf(image))} src={image.src.large} alt=""></img>
-        <div className="image-act">
-          {!favIdd.includes(image.id) ? <i onClick={() => favImage(datab.indexOf(image))} className="fa-regular fa-heart" aria-hidden="true"></i>
-          : <i onClick={() => favImage(datab.indexOf(image))} className="fa-solid fa-heart image-favs" aria-hidden="true"></i>}
-          <i className="fa-regular fa-circle-down"></i>
-          <i className="fa fa-share" aria-hidden="true"></i>
+        <div className="image-card trans" key={image.id} >
+          <img onClick={() => clickHandler(image, datab.indexOf(image))} src={image.src.large} alt=""></img>
+          <div className="image-act">
+            {!favIdd.includes(image.id) ? <i onClick={() => favImage(datab.indexOf(image))} className="fa-regular fa-heart" aria-hidden="true"></i>
+            : <i onClick={() => favImage(datab.indexOf(image))} className="fa-solid fa-heart image-favs" aria-hidden="true"></i>}
+            <i className="fa-regular fa-circle-down"></i>
+            <i className="fa fa-share" aria-hidden="true"></i>
+          </div>
         </div>
-      </div>
     );
   }});
 
@@ -183,7 +199,7 @@ export default function Wallpaper({user, setUser, favs, usr}) {
           </div>
         </section>: ""}
       </div>
-      <div className="wallpaper-page">{imageCard}</div>
+      <div className="wallpaper-page">{loading ? skeleton :imageCard}</div>
       {favs? "": <div className="footer" onClick={nextPage}>
         <button>Load More ...</button>
       </div>}
