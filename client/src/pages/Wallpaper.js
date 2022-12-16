@@ -218,7 +218,7 @@ export default function Wallpaper({user, setUser, favs, usr}) {
             ></i>
           )}
           <i
-            onClick={() => downloadImage(image.src.original)}
+            onClick={() => downloadImage(image.src.large)}
             className="fa-regular fa-circle-down"
           ></i>
           {/* <i className="fa fa-share" aria-hidden="true"></i> */}
