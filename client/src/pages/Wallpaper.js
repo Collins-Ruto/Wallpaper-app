@@ -122,7 +122,29 @@ export default function Wallpaper({user, setUser, favs, usr}) {
         localStorage.setItem("user", JSON.stringify(res.data));
         console.log(res);
       });
-  }}
+    }
+  }
+  
+  function downloadImage(src) {
+    const img = new Image();
+    img.crossOrigin = "anonymous"; // This tells the browser to request cross-origin access when trying to download the image data.
+    // ref: https://developer.mozilla.org/en-US/docs/Web/HTML/CORS_enabled_image#Implementing_the_save_feature
+    img.src = src;
+    img.onload = () => {
+      // create Canvas
+      const canvas = document.createElement("canvas");
+      const ctx = canvas.getContext("2d");
+      canvas.width = img.width;
+      canvas.height = img.height;
+      ctx.drawImage(img, 0, 0);
+      // create a tag
+      const a = document.createElement("a");
+      a.download = "download.png";
+      a.href = canvas.toDataURL("image/png");
+      a.click();
+    };
+  }
+
   // show favorite images on favorite and user tabs
   useEffect(() => {
     favs && setData(favs)
@@ -161,7 +183,7 @@ export default function Wallpaper({user, setUser, favs, usr}) {
         <div className="skeleton-act image-act">
           <i className="fa-solid fa-heart image-favs" aria-hidden="true"></i>
           <i className="fa-regular fa-circle-down"></i>
-          <i className="fa fa-share" aria-hidden="true"></i>
+          {/* <i className="fa fa-share" aria-hidden="true"></i> */}
         </div>
       </div>
     );
@@ -175,15 +197,33 @@ export default function Wallpaper({user, setUser, favs, usr}) {
     } else {
     allImgIds.push(image.id);
     return (
-        <div className="image-card trans" key={image.id} >
-          <img onClick={() => clickHandler(image, datab.indexOf(image))} src={image.src.large} alt=""></img>
-          <div className="image-act">
-            {!favIdd.includes(image.id) ? <i onClick={() => favImage(datab.indexOf(image))} className="fa-regular fa-heart" aria-hidden="true"></i>
-            : <i onClick={() => favImage(datab.indexOf(image))} className="fa-solid fa-heart image-favs" aria-hidden="true"></i>}
-            <i className="fa-regular fa-circle-down"></i>
-            <i className="fa fa-share" aria-hidden="true"></i>
-          </div>
+      <div className="image-card trans" key={image.id}>
+        <img
+          onClick={() => clickHandler(image, datab.indexOf(image))}
+          src={image.src.large}
+          alt=""
+        ></img>
+        <div className="image-act">
+          {!favIdd.includes(image.id) ? (
+            <i
+              onClick={() => favImage(datab.indexOf(image))}
+              className="fa-regular fa-heart"
+              aria-hidden="true"
+            ></i>
+          ) : (
+            <i
+              onClick={() => favImage(datab.indexOf(image))}
+              className="fa-solid fa-heart image-favs"
+              aria-hidden="true"
+            ></i>
+          )}
+          <i
+            onClick={() => downloadImage(image.src.original)}
+            className="fa-regular fa-circle-down"
+          ></i>
+          {/* <i className="fa fa-share" aria-hidden="true"></i> */}
         </div>
+      </div>
     );
   }});
 

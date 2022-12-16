@@ -24,8 +24,8 @@
     align-items: center;
 }
 .img-owner img {
-    width: 4rem;
-    height: 4rem;
+    width: 3rem;
+    height: 3rem;
     border-radius: 50%;
     margin: 0 .5rem;
 }
@@ -36,7 +36,6 @@
 }
 .img-likes,.img-fav-add  {
 padding: .2rem .4rem;
-box-shadow: .1rem .1rem 3px ;
 border-radius: .2rem;
 cursor: pointer;
 }
