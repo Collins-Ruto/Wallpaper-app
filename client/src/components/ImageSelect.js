@@ -61,7 +61,7 @@ export default function ImageSelect({image, user, setUser}) {
               ></i>
             )}
           </div>
-          <div onClick={() => downloadImage(image.src.original)} className="img-download">
+          <div onClick={() => downloadImage(image.src.large)} className="img-download">
             <i className="fa-regular fa-circle-down"></i>
           </div>
         </div>
