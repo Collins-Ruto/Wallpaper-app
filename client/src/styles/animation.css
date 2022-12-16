@@ -1,0 +1,18 @@
+.skeleton-img {
+    animation: 2s ease-in-out infinite flow;
+}
+
+@keyframes flow {
+    0% {
+        opacity: 0.9;
+        transform: scale(0.99);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 0.9;
+        transform: scale(0.99);
+    }
+}

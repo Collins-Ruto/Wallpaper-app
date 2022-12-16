@@ -3,7 +3,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import Favorites from "./pages/Favorites";
 import User from "./pages/User";
 import Upload from "./pages/Upload";
-import Wallpaper from "./pages/Wallpaper";
+import Wallpaper from "./pages/Wallpaper" ;
 import Login from "./pages/Login";
 
 function App() {
