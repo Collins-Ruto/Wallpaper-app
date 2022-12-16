@@ -81,15 +81,17 @@
 
 .image-act {
   position: absolute;
+  display: flex;
   bottom: 0;
   background: transparent;
   margin: 0 auto;
-  margin-top: -2.4rem;
+  margin-top: -2.5rem;
   padding: 1.5rem 0 0.2rem 0;
   width: 100%;
   border-radius: 0rem;
   opacity: 1;
   text-align: center;
+  justify-content: space-between;
 }
 .image-act:hover {
   opacity: 1;
@@ -231,30 +233,32 @@
 }
 .x-toggle {
   cursor: pointer;
-  background-color: rgb(129, 89, 89);
-  height: 2.5rem;
-  width: 2.5rem;
+  background-color: rgb(229, 99, 99);
+  height: 2rem;
+  width: 2rem;
   margin: 0.5rem 0 0 1rem;
   border-radius: 0.5rem;
   float: left;
+  color:white;
 }
 .x-toggle:hover {
   background-color: rgb(173, 58, 58);
   transform: scale(0.924);
 }
 .xmark {
-  width: 2rem;
+  width: 1.7rem;
   height: 0.25rem;
   margin-top: 0.5rem;
-  background-color: azure;
+  background-color: white;
   transform: rotate(45deg);
   float: left;
-  margin: 1.1rem 0 0 0.25rem;
+  margin: .9rem 0 0 0.2rem;
+  color:white;
 }
 .xmark::before {
   content: "";
   display: block;
-  width: 2rem;
+  width: 1.7rem;
   height: 0.25rem;
   background-color: rgb(250, 255, 255);
   transform: rotate(90deg);
@@ -396,7 +400,6 @@
     align-items: center;
     justify-content: center;
     height: 100%;
-    padding-bottom: 1rem;
   }
 
   .image-card img {
