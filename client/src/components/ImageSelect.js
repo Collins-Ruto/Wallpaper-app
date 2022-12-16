@@ -19,30 +19,34 @@ export default function ImageSelect({image, user, setUser}) {
     }
   return (
     <div className="img-select-cont">
-        <div className="img-sect-head">
-            <div className="img-owner">
-                <img src={imag} alt=""></img>
-                <h3>{image.photographer}</h3>
-            </div>
-            <div className="img-head-rgt">
-                <div className="img-likes">
-                    <i className="fa-regular fa-thumbs-up "></i>
-                    Like
-                </div>
-            <div className="img-fav-add" onClick={favImage}>
-                {!liked ? <i className="fa-regular fa-heart" aria-hidden="true"></i>
-          : <i className="fa-solid fa-heart image-favs" aria-hidden="true"></i>}
-                Favorite
-            </div>
-            <div className="img-download">
-                <button>Download</button>
-            </div>
-            </div>
+      <div className="img-sect-head">
+        <div className="img-owner">
+          <img src={imag} alt=""></img>
+          <h3>{image.photographer}</h3>
         </div>
-        <div className="img-content">
-             <img src={image.src.large} alt=""></img>
+        <div className="img-head-rgt">
+          <div className="img-likes">
+            <i className="fa-regular fa-thumbs-up "></i>
+          </div>
+          <div className="img-fav-add" onClick={favImage}>
+            {!liked ? (
+              <i className="fa-regular fa-heart" aria-hidden="true"></i>
+            ) : (
+              <i
+                className="fa-solid fa-heart image-favs"
+                aria-hidden="true"
+              ></i>
+            )}
+          </div>
+          <div className="img-download">
+            <i className="fa-regular fa-circle-down"></i>
+          </div>
         </div>
-        <div className="img-alt">{image.alt}</div>
+      </div>
+      <div className="img-content">
+        <img src={image.src.large} alt=""></img>
+      </div>
+      <div className="img-alt">{image.alt}</div>
     </div>
-  )
+  );
 }
